@@ -2,7 +2,7 @@ import { Product } from './../../../shared/models/product';
 import { Subscription } from 'rxjs/Subscription';
 import { ProductService } from './../../../shared/services/product.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-admin-products',
@@ -11,19 +11,14 @@ import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
 	products: Product[];
+  filtered: any[];
 	subscription: Subscription;
-	tableResource: DataTableResource<Product>;
-	items: Product[] = [];
-	itemCount: number;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
 
-  constructor(private productService: ProductService) {
-  	this.subscription = this.productService.getAll()
-  		.subscribe(products => {
-  			this.products = products;
-  			this.initializeTable(products);
-  		});
-  }
+  constructor(private productService: ProductService) {}
 
+  /*
   private initializeTable(products: Product[]) {
   	this.tableResource = new DataTableResource(products);
   	this.tableResource.query({ offset: 0})
@@ -38,22 +33,45 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   	this.tableResource.query(params)
   	  .then(items => this.items = items);
   }
+  */
 
-  // client-side filtering
-  filter(query: string) {
-  	//console.log(query);
-  	let filteredProducts = (query) ?
-  		this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
-  		this.products;
+  ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      searching: false,
+      //ordering: false,  // this turns off ordering in the whole table
+      columns: [
+        { "data": "title",
+          "title": "Title"
+        },
+        { "data": "price",
+          "title": "Price"
+        },
+        { "data": "edit",
+          "title": "",
+          "orderable": false // this turns off ordering in this specific column only
+        }
+      ]
+    };
 
-  	this.initializeTable(filteredProducts);
+    this.subscription = this.productService.getAll()
+      .subscribe(products => {
+        this.filtered = this.products = products;
+        this.dtTrigger.next();
+      });
   }
 
   ngOnDestroy() {
   	this.subscription.unsubscribe();
   }
 
-  ngOnInit() {
+  // client-side filtering
+  filter(query: string) {
+    //console.log(query);
+    this.filtered = (query) ?
+      this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
+      this.products;
   }
 
 }

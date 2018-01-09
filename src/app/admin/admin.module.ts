@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from './../shared/shared.module';
-import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
+import { DataTablesModule } from 'angular-datatables';
 import { RouterModule } from '@angular/router';
 
 // Components
@@ -15,7 +15,7 @@ import { AuthGuard } from './../shared/services/auth-guard.service';
 @NgModule({
   imports: [
     SharedModule,
-    DataTableModule,
+    DataTablesModule,
     RouterModule.forChild([
       { 
         path: 'admin/products/new', 

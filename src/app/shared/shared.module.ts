@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
-import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
+//import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -27,7 +27,7 @@ import { OrderService } from './services/order.service';
     CommonModule,
     FormsModule,
     CustomFormsModule,
-    DataTableModule,
+    //NgxDatatableModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule.forRoot(),
@@ -42,7 +42,7 @@ import { OrderService } from './services/order.service';
       CommonModule,
       FormsModule,
       CustomFormsModule,
-      DataTableModule,
+      //NgxDatatableModule,
       AngularFireDatabaseModule,
       AngularFireAuthModule,
       NgbModule.forRoot().ngModule,
