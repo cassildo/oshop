@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
-//import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { DataTablesModule } from 'angular-datatables';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -12,6 +12,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // Components
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 // Services
 import { AuthService } from './services/auth.service';
@@ -27,7 +28,7 @@ import { OrderService } from './services/order.service';
     CommonModule,
     FormsModule,
     CustomFormsModule,
-    //NgxDatatableModule,
+    DataTablesModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule.forRoot(),
@@ -35,6 +36,7 @@ import { OrderService } from './services/order.service';
   declarations: [
   	  ProductCardComponent,
       ProductQuantityComponent,
+      OrderDetailsComponent
   ],
   exports: [
   	  ProductCardComponent,
@@ -42,7 +44,7 @@ import { OrderService } from './services/order.service';
       CommonModule,
       FormsModule,
       CustomFormsModule,
-      //NgxDatatableModule,
+      DataTablesModule,
       AngularFireDatabaseModule,
       AngularFireAuthModule,
       NgbModule.forRoot().ngModule,

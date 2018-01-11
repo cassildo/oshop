@@ -1,0 +1,83 @@
+<h2>Order Details</h2>
+<div>
+	<!-- order items -->
+	<div class="card">
+	  <div class="card-body">
+	    <h5 class="card-title">Products</h5>
+	    <ul class="list-group list-group-flush">
+	    	<li *ngFor="let item of order.items" class="list-group-item">
+	    		{{ item.quantity | json }} x {{ item.product.title }}
+	    		<div class="float-right">
+	    			{{ item.totalPrice | currency:'EUR':true }}
+	    		</div>
+	    	</li>
+	    	<li class="list-group-item font-weight-bold">
+	    		Total
+	    		<div class="float-right">
+	    			{{ priceTotal | currency:'EUR':true }}
+	    		</div>
+	    	</li>
+	    </ul>
+	  </div>
+	</div>
+	<!-- shipping info -->
+	<div *ngIf="order" class="card">
+	  <div class="card-body">
+	    <h5 class="card-title">Shipping Details</h5>
+	    <ul class="list-group list-group-flush">
+	    	<li class="list-group-item">
+	    		<div class="font-weight-bold">
+	    			Name
+	    		</div>
+	    		<div class="float-right">
+	    			{{ order.shipping.name }}
+	    		</div>
+	    	</li>
+	    	<li class="list-group-item">
+	    		<div class="font-weight-bold">
+	    			Address
+	    		</div>
+	    		<div class="float-right">
+	    			{{ order.shipping.addressLine1 }}
+	    		</div>
+	    	</li>
+	    	<li class="list-group-item">
+	    		<div class="float-right">
+	    			{{ order.shipping.addressLine2 }}
+	    		</div>
+	    	</li>
+	    	<li class="list-group-item">
+	    		<div class="font-weight-bold">
+	    			City
+	    		</div>
+	    		<div class="float-right">
+	    			{{ order.shipping.city }}
+	    		</div>
+	    	</li>
+	    </ul>
+	  </div>
+	</div>
+	<!--
+	<table>
+		<tr>
+			<th><h3>Shipping Details</h3></th>
+		</tr>
+		<tr>
+			<th>Name</th>
+			<td>{{ order.shipping.name }}</td>
+		</tr>
+		<tr>
+			<th>Address</th>
+			<td>{{ order.shipping.addressLine1 }}</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>{{ order.shipping.addressLine2 }} </td>
+		</tr>
+		<tr>
+			<th>City</th>
+			<td>{{ order.shipping.city }} </td>
+		</tr>
+	</table>
+-->
+</div>

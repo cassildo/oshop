@@ -25,4 +25,8 @@ export class OrderService {
   		}
   	});
   }
+
+  get(id) {
+    return this.db.object('/orders/' + id);
+  }
 }

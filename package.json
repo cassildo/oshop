@@ -33,11 +33,11 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "ng2-validation": "^4.2.0",
-    "rxjs": "^5.4.1",
+    "rxjs": "^5.5.5",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.5.5",
+    "@angular/cli": "1.6.0",
     "@angular/compiler-cli": "^5.0.0",
     "@angular/language-service": "^5.0.0",
     "@types/datatables.net": "^1.10.8",
