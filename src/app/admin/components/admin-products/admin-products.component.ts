@@ -1,8 +1,9 @@
 import { Product } from './../../../shared/models/product';
 import { Subscription } from 'rxjs/Subscription';
 import { ProductService } from './../../../shared/services/product.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-admin-products',
@@ -10,11 +11,18 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./admin-products.component.css']
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
-	products: Product[];
-  filtered: any[];
-	subscription: Subscription;
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
+	//products: Product[];
+  //filtered: any[];
+  //dtOptions: DataTables.Settings = {};
+  //dtTrigger: Subject<any> = new Subject();
+
+  subscription: Subscription;
+
+  displayedColumns = ['title', 'price', 'edit'];
+  dataSource =  new MatTableDataSource();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private productService: ProductService) {}
 
@@ -36,6 +44,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   */
 
   ngOnInit() {
+    /*
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -54,18 +63,30 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
         }
       ]
     };
+    */
 
     this.subscription = this.productService.getAll()
       .subscribe(products => {
+        /*
         this.filtered = this.products = products;
         this.dtTrigger.next();
+        */
+        this.dataSource.data = products;
       });
   }
 
-  ngOnDestroy() {
-  	this.subscription.unsubscribe();
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+ 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
+  /*
   // client-side filtering
   filter(query: string) {
     //console.log(query);
@@ -73,5 +94,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
       this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
       this.products;
   }
+  */
 
+  ngOnDestroy() {
+  	this.subscription.unsubscribe();
+  }
 }

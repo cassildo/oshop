@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from './../shared/shared.module';
-import { DataTablesModule } from 'angular-datatables';
 import { RouterModule } from '@angular/router';
+import { MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatSortModule } from '@angular/material'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Components
 import { ProductFormComponent } from './components/product-form/product-form.component';
@@ -15,7 +16,12 @@ import { AuthGuard } from './../shared/services/auth-guard.service';
 @NgModule({
   imports: [
     SharedModule,
-    DataTablesModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule,
+    BrowserAnimationsModule,
     RouterModule.forChild([
       { 
         path: 'admin/products/new', 
